@@ -1,4 +1,3 @@
-
 /*
 GAME RULES:
 
@@ -55,7 +54,7 @@ document.querySelector('.btn-hold').addEventListener('click', () => {
 });
 
 const nextPlayer = () => {
-    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
+    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0 ;
     roundScore = 0;
 
     document.getElementById('current-0').textContent = '0';
