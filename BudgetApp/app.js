@@ -1,33 +1,40 @@
+//Budget Controller
 var budgetController = (function() {
-  var x = 23; 
-
-  var add = function name(a) {
-    return x + a;
-  }
-
-  return{
-    publicTest: function(b){
-      return add(b);
-    }
-  }
+ 
 
 })();
 
-
+// UI Controller
 var UIController =(function(){
 
   //code here
 
 })();
 
+// GOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
   
-  var z = budgetCtrl.publicTest(5);
+  var ctrlAddItem = () => {
+    // get input data 
 
-  return{
-    anotherPublic: function() {
-      console.log(z)
-    }
+    // add the item
+
+    // add to UI 
+
+    // calc the budget 
+
+    // display the budget on UI 
+    console.log("working ")
   }
+
+  document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+
+  document.addEventListener('keypress', (event) => {
+
+    if(event.keyCode === 13 || event.which === 13){
+      ctrlAddItem()
+    }
+
+  })
 
 })(budgetController, UIController);
