@@ -7,13 +7,34 @@ var budgetController = (function() {
 // UI Controller
 var UIController =(function(){
 
-  //code here
+  var DOMStrings = {
+    inputType: '.add__type', 
+    inputDescription: '.add__description', 
+    inputValue: '.add__value', 
+    inputBtn: '.add__btn'
+  };
+
+  return{
+    getInputs: () => {
+      return{
+        type: document.querySelector(DOMStrings.inputType).value,
+        description: document.querySelector(DOMStrings.inputDescription).value,
+        value: document.querySelector(DOMStrings.inputValue).value
+      };
+    },
+
+    getDOMStrings: () => DOMStrings
+    
+     
+  }
 
 })();
 
 // GOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
   
+  var DOMs = UICtrl.getDOMStrings();
+
   var ctrlAddItem = () => {
     // get input data 
 
@@ -27,7 +48,7 @@ var controller = (function(budgetCtrl, UICtrl) {
     console.log("working ")
   }
 
-  document.querySelector('.add__btn').addEventListener('click', ctrlAddItem);
+  document.querySelector(DOMs.inputBtn).addEventListener('click', ctrlAddItem);
 
   document.addEventListener('keypress', (event) => {
 
@@ -35,6 +56,6 @@ var controller = (function(budgetCtrl, UICtrl) {
       ctrlAddItem()
     }
 
-  })
+  });
 
 })(budgetController, UIController);
