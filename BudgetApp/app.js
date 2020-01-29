@@ -23,21 +23,30 @@ var UIController =(function(){
       };
     },
 
-    getDOMStrings: () => DOMStrings
-    
-     
-  }
+    getDOMStrings: () => DOMStrings 
+  };
 
 })();
 
 // GOBAL APP CONTROLLER
 var controller = (function(budgetCtrl, UICtrl) {
-  
-  var DOMs = UICtrl.getDOMStrings();
 
+  const setupEventListeners = () => {
+    var DOMs = UICtrl.getDOMStrings();
+   
+    document.querySelector(DOMs.inputBtn).addEventListener('click', ctrlAddItem);
+
+    document.addEventListener('keypress', (event) => {
+      if(event.keyCode === 13 || event.which === 13){
+        ctrlAddItem();
+      }
+    });
+  };
+  
   var ctrlAddItem = () => {
     // get input data 
-
+    var input = UICtrl.getInputs();
+    console.log(input);
     // add the item
 
     // add to UI 
@@ -45,17 +54,16 @@ var controller = (function(budgetCtrl, UICtrl) {
     // calc the budget 
 
     // display the budget on UI 
-    console.log("working ")
-  }
+    console.log("working ");
+  };
 
-  document.querySelector(DOMs.inputBtn).addEventListener('click', ctrlAddItem);
-
-  document.addEventListener('keypress', (event) => {
-
-    if(event.keyCode === 13 || event.which === 13){
-      ctrlAddItem()
+  return {
+    init: () => {
+      console.log("application has started");
+      setupEventListeners();
     }
-
-  });
+  };
 
 })(budgetController, UIController);
+
+controller.init();
