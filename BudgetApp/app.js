@@ -57,6 +57,16 @@ const budgetController = (function() {
       return newItem;
     },
 
+    deleteItem: (type, id) => {
+      let ids, idx;
+      
+      ids = data.allItems[type].map(ele => ele.id);
+      idx = ids.indexOf(id);
+      if(idx !== -1){
+        data.allItems[type].splice(idx, 1);
+      }
+    },
+
     calculateBudget: () => {
       
       // calculate total income and expenses
@@ -224,7 +234,9 @@ var controller = ((budgetCtrl, UICtrl) => {
     if(itemID){
       splitID = itemID.split('-');
       type = splitID[0];
-      ID = splitID[1];
+      ID = parseInt(splitID[1]);
+
+      budgetCtrl.deleteItem(type, ID);
       
     }
   };
