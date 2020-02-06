@@ -160,7 +160,13 @@ const UIController =(function(){
     dec = numSplit[1];
 
     return (type === 'exp' ? '-' : '+') + ' ' + int + '.' + dec;
-  }
+  };
+
+  const nodeListForEach = (list, callback) => {
+    for( let [idx, ele] of list.entries()){
+      callback(ele, idx);
+    }
+  };
 
   return{
     getInputs: () => {
@@ -223,12 +229,6 @@ const UIController =(function(){
 
     displayPercentages: (percentages) => {
       let fields = document.querySelectorAll(DOMStrings.expensesPercLabel);
-
-      const nodeListForEach = (list, callback) => {
-        for( let [idx, ele] of list.entries()){
-          callback(ele, idx);
-        }
-      };
       
       nodeListForEach(fields, (cur, idx) => {
         if(percentages[idx] > 0) {
@@ -244,10 +244,20 @@ const UIController =(function(){
       let now, months, month, year;
       
       now = new Date();
-      months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      months = ['January', 'Febuary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       month = now.getMonth();
       year = now.getFullYear();
       document.querySelector(DOMStrings.dateLabel).textContent = `${months[month - 1]}  ${year}`;
+    },
+    
+    changedType: () => {
+      let fields = document.querySelectorAll(
+        DOMStrings.inputType + ',' +
+        DOMStrings.inputDescription + ','  + 
+        DOMStrings.inputValue);
+
+        nodeListForEach(fields, cur => cur.classList.toggle('red-focus'));
+        document.querySelector(DOMStrings.inputBtn).classList.toggle('red');
     },
     
     getDOMStrings: () => DOMStrings, 
@@ -270,7 +280,7 @@ var controller = ((budgetCtrl, UICtrl) => {
     });
 
     document.querySelector(DOMs.container).addEventListener('click', ctrDeleteItem);
-
+    document.querySelector(DOMs.inputType).addEventListener('change', UICtrl.changedType);
   };
   
   const updateBudget = () => {
@@ -340,7 +350,7 @@ var controller = ((budgetCtrl, UICtrl) => {
   return {
     init: () => {
       console.log("application has started");
-      UICtrl.displayMonth()
+      UICtrl.displayMonth();
       UICtrl.displayBudget({
         budget: 0,
         totalInc: 0,
