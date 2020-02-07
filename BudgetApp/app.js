@@ -153,8 +153,12 @@ const UIController =(function(){
 
     int = numSplit[0];
 
-    if(int.length > 3){
+    if(int.length > 3 && int.length < 6){
       int = int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3);
+    } else if(int.length > 6 && int.length < 9){
+      int = int.substr(0, int.length - 6) + ',' + int.substr(int.length - 6, 3) + ',' + int.substr(int.length - 3, 3);
+    } else if(int.length > 9){
+      int = int.substr(0, int.length - 9) + ',' + int.substr(int.length - 9, 3) + ',' + int.substr(int.length - 6, 3) + ',' + int.substr(int.length - 3, 3) ;
     }
     
     dec = numSplit[1];
