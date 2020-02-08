@@ -1,0 +1,17 @@
+{
+  "name": "forkity",
+  "version": "1.0.0",
+  "description": "food recipe finder ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production"
+  },
+  "author": "Jerry Velazquez",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10"
+  },
+  "dependencies": {}
+}
