@@ -17,6 +17,3 @@ export default class Search {
   }
 
 }
-
-// replace in Recipe.js
-// `https://forkify-api.herokuapp.com/api/get?rId=${this.id}`;

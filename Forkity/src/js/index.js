@@ -24,7 +24,7 @@ const controlSearch = async () => {
     searchView.clearResults();
     renderLoader(elements.searchRes);
     try {
-      //  4 Search for recipes
+      //  4 Search for recipes 
       await state.search.getResults();
       
       // 5 Render results on UI
@@ -34,6 +34,7 @@ const controlSearch = async () => {
     } catch (error) {
       alert('Something Wrong with the search');
       console.error(error);
+      clearLoader();
     }
   }
 };
@@ -56,13 +57,14 @@ elements.searchResPages.addEventListener('click', e => {
 // RECIPE CONTROLLER
 
 const controlRecipe = async () => {
-  const id = window.location.hash.replace('#', '')
+  const id = window.location.hash.replace('#', '');
   if(id){
     // create recipe id
-    state.recipe = new Recipe(id)
+    state.recipe = new Recipe(id);
     try {
-      // get recipe info
+      // get recipe info and format ingredients
       await state.recipe.getRecipe();
+      state.recipe.parseIngredients();
       
       // Calc recipe serve + time 
       state.recipe.calcTime();
