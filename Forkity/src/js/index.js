@@ -58,8 +58,13 @@ elements.searchResPages.addEventListener('click', e => {
 // RECIPE CONTROLLER
 
 const controlRecipe = async () => {
+  // get ID from url 
   const id = window.location.hash.replace('#', '');
   if(id){
+    // prepping UI
+    recipeView.clearRecipe();
+    renderLoader(elements.recipe);
+
     // create recipe id
     state.recipe = new Recipe(id);
     try {
@@ -72,7 +77,9 @@ const controlRecipe = async () => {
       state.recipe.calcServings();
   
       // render recipe 
-      console.log(state.recipe)
+      clearLoader();
+      recipeView.renderRecipe(state.recipe);
+      console.log(state.recipe); 
     } catch (error) {
       alert('Error processing recipe!');
       console.error(error);
