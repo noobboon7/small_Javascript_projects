@@ -1,14 +1,15 @@
 .grid{
-  width: 200px;
-  height: 200px;
+  width: 500px;
+  height: 500px;
   display: flex;
+  margin: auto;
   flex-wrap: wrap;
   border-style: solid;
 }
 
 .grid div{
-  width: 20px;
-  height: 20px;
+  width: 50px;
+  height: 50px;
 }
 
 .snake{
@@ -17,4 +18,24 @@
 
 .apple{
   background-color: red;
+}
+
+.display{
+  position: absolute;
+  left: 400px;
+  top: 300px;
+  padding: 5px;
+}
+.start{
+  background-color: rgb(198, 218, 197);
+  border-radius: 7px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.score{
+  padding: 5px;
+  margin: 5px;
+  font-size: large;
+  font-weight: 700;
 }
