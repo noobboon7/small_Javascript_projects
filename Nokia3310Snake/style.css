@@ -20,12 +20,7 @@
   background-color: red;
 }
 
-.display{
-  position: absolute;
-  left: 400px;
-  top: 300px;
-  padding: 5px;
-}
+
 .start{
   background-color: rgb(198, 218, 197);
   border-radius: 7px;
