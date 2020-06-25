@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     30,31,32,33,34,35,36,37,38,39
   ];
   // add invaders to the board
-  alienInvaders.forEach(invader => squares[invader].classList.add('invader'));
+  alienInvaders.forEach(invader => squares[curInvaderIdx + invader].classList.add('invader'));
   // add shooter to the board
   squares[curShooterIdx].classList.add('shooter');
 
@@ -52,8 +52,11 @@ document.addEventListener('DOMContentLoaded', () => {
     for (let i = 0; i <= alienInvaders.length-1; i++) {
       alienInvaders[i] += direction;
     }
-    for (let i = 0; i <= alienInvaders.length-1; i++) {
-      squares[alienInvaders[i]].classList.add('invader');
+
+    for(let i =0; i <= alienInvaders.length-1; i++){
+      if(!alienInvaderTakenDown.includes(i)) {
+        squares[alienInvaders[i]].classList.add('invader');
+      }
     }
     
     // check for overlapping; game over
@@ -69,7 +72,48 @@ document.addEventListener('DOMContentLoaded', () => {
         clearInterval(invaderId);
       }
     }
-    
+
+    if (alienInvaders.length === alienInvaderTakenDown.length) {
+      resultDisplay.textContent = 'You win';
+      clearInterval(invaderId);   
+    }
   }
+  
   invaderId = setInterval(moveInvaders, 500);
+
+  function shoot(e) {
+    let laserId,
+    curLaserIdx = curShooterIdx;
+
+    function moveLaser() {
+      squares[curLaserIdx].classList.remove('laser');
+      curLaserIdx -= width;
+      squares[curLaserIdx].classList.add('laser');
+      if(squares[curLaserIdx].classList.contains('invader')){
+        squares[curLaserIdx].classList.remove('laser');
+        squares[curLaserIdx].classList.remove('invader');
+        squares[curLaserIdx].classList.add('boom');
+
+        setTimeout(() => squares[curLaserIdx].classList.remove('boom',250));
+        clearInterval(laserId);
+
+        const alienTakenDown = alienInvaders.indexOf(curLaserIdx);
+        alienInvaderTakenDown.push(alienTakenDown);
+        result++;
+        resultDisplay.textContent = result;
+      }
+
+      if (curLaserIdx < width) {
+        clearInterval(laserId);
+        setTimeout(()=> squares[curLaserIdx].classList.remove('laser'));
+      }
+    }
+    
+    document.addEventListener('keyup', e =>{
+      if(e.keyCode === 32) laserId = setInterval(moveLaser, 100);
+    });
+  }
+
+  document.addEventListener('keyup', shoot); 
+
 });
