@@ -12,7 +12,9 @@
 }
 
 .shooter{
-  background-color: grey;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid grey;
 }
 
 .invader{
