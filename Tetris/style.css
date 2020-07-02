@@ -78,6 +78,9 @@ div {
   align-items: center;
   width: 20rem;
   height: 40rem;
+  /* border: solid .1rem;
+
+  border-radius: .6rem; */
 }
 
 .previous-shape {
